@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-crud-api",
+  "version": "1.0.0",
+  "description": "Assignment: CRUD API",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylphur/nodejs-crud-api.git"
+  },
+  "author": "Sylphur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sylphur/nodejs-crud-api/issues"
+  },
+  "homepage": "https://github.com/Sylphur/nodejs-crud-api#readme"
+}
