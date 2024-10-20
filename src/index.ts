@@ -1,9 +1,14 @@
 // import fs from 'fs';
 // import fsp from 'fs/promises';
 // import path from 'path';
-// import http from 'http';
+import http from 'http';
 // import events from 'events';
 import 'dotenv/config';
 
-console.log('Hello world');
-console.log(process.env.PORT);
+const PORT = process.env.PORT || 3500;
+
+const server = http.createServer((req) => {
+  console.log(req.url, req.method);
+});
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
