@@ -4,37 +4,46 @@ import { getUsers } from './routes/get';
 import { postUsers } from './routes/post';
 import { putUsers } from './routes/put';
 import { deleteUsers } from './routes/delete';
+import { write404NonExisting } from './services/writeClientErrors';
+import { write500AnyError } from './services/writeServerErrors';
 
 const PORT = process.env.PORT || 3500;
 
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  let body = '';
-  req.on('data', (chunk) => {
-    body += chunk.toString();
-  });
+  try {
+    let body = '';
+    req.on('data', (chunk) => {
+      body += chunk.toString();
+    });
 
-  switch (req.method) {
-    case 'GET': {
-      getUsers(req.url, res);
-      break;
+    switch (req.method) {
+      case 'GET': {
+        getUsers(req.url, res);
+        break;
+      }
+      case 'POST': {
+        req.on('end', () => {
+          postUsers(req.url, body, res);
+        });
+        break;
+      }
+      case 'PUT': {
+        req.on('end', () => {
+          putUsers(req.url, body, res);
+        });
+        break;
+      }
+      case 'DELETE': {
+        deleteUsers(req.url, res);
+        break;
+      }
+      default: {
+        write404NonExisting(res);
+      }
     }
-    case 'POST': {
-      req.on('end', () => {
-        postUsers(req.url, body, res);
-      });
-      break;
-    }
-    case 'PUT': {
-      req.on('end', () => {
-        putUsers(req.url, body, res);
-      });
-      break;
-    }
-    case 'DELETE': {
-      deleteUsers(req.url, res);
-      break;
-    }
+  } catch (error) {
+    console.error(error);
+    write500AnyError(res);
   }
 });
 

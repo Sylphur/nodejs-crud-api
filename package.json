@@ -9,12 +9,13 @@
   },
   "scripts": {
     "start": "nodemon src/index.ts",
+    "start:prod": "tsc --build && node dist/index.js",
+    "clean": "tsc --build --clean",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest --silent",
     "test:verbose": "jest",
-    "test:detect": "jest --detectOpenHandles",
-    "build": "tsc"
+    "test:detect": "jest --detectOpenHandles"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.5",
