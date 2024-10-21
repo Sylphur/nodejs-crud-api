@@ -2,24 +2,33 @@ import http from 'http';
 import 'dotenv/config';
 import { getUsers } from './routes/get';
 import { postUsers } from './routes/post';
+import { putUsers } from './routes/put';
 
 const PORT = process.env.PORT || 3500;
 
 const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
+  let body = '';
+  req.on('data', (chunk) => {
+    body += chunk.toString();
+  });
+
   switch (req.method) {
     case 'GET': {
       getUsers(req.url, res);
       break;
     }
     case 'POST': {
-      let body = '';
-      req.on('data', (chunk) => {
-        body += chunk.toString();
-      });
       req.on('end', () => {
         postUsers(req.url, body, res);
       });
+      break;
+    }
+    case 'PUT': {
+      req.on('end', () => {
+        putUsers(req.url, body, res);
+      });
+      break;
     }
   }
 });
