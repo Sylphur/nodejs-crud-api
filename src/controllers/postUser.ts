@@ -9,9 +9,6 @@ import {
 } from '../services/validateRequestBody';
 
 export const postUser = (body: DbModel, res: http.ServerResponse) => {
-  console.log(validateUsername(body.username));
-  console.log(validateAge(body.age));
-  console.log(validateHobbies(body.hobbies));
   if (
     !validateUsername(body.username) ||
     !validateAge(body.age) ||
