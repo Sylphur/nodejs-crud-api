@@ -1,6 +1,6 @@
 export const validateAge = (age?: number) => {
   if (!age) return false;
-  else return Number.isInteger(age) && age > 0;
+  else return Number.isInteger(age) && age > 0 && age < 100;
 };
 export const validateUsername = (username?: string) => {
   if (!username) return false;
