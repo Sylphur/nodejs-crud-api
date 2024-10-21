@@ -17,6 +17,7 @@ export const getUser = (id: string, res: http.ServerResponse) => {
         charset: 'utf-8',
       });
       res.end(JSON.stringify(takenUser));
+      return takenUser;
     } else {
       write404NotFound(res);
     }
