@@ -9,8 +9,10 @@
   },
   "scripts": {
     "start:dev": "nodemon src/index.ts",
-    "start:prod": "tsc --build && node dist/index.js",
-    "clean": "tsc --build --clean",
+    "start:prod": "tsc --build & node dist/index.js",
+    "start:workers": "nodemon src/multi.ts $$ nodemon src/loadBalancer.ts",
+    "start:balancer": "nodemon src/loadBalancer.ts",
+    "start:multi": "start npm run start:workers && start npm run start:balancer",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest --silent",

@@ -8,6 +8,7 @@ import { write500AnyError } from '../services/writeServerErrors';
 export const getUsers = (url: string | undefined, res: http.ServerResponse) => {
   let returnValue;
   const query = takeQueryParams(url);
+
   if (!query) write404NonExisting(res);
   else {
     if (query.searchAll) {
