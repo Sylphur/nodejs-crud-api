@@ -1,22 +1,18 @@
 import http from 'http';
-import { db } from '../model/db';
-import { getQuery } from '../services/getQuery';
-import { write404 } from '../services/write404';
+import { takeQueryParams } from '../services/takeQueryParams';
+import { write404NonExisting } from '../services/writeClientErrors';
+import { getAllUsers } from '../controllers/getAllUsers';
+import { getUser } from '../controllers/getUser';
+import { write500AnyError } from '../services/writeServerErrors';
 
 export const getUsers = (url: string | undefined, res: http.ServerResponse) => {
-  const query = getQuery(url);
-  if (!query) write404(res);
+  const query = takeQueryParams(url);
+  if (!query) write404NonExisting(res);
   else {
     if (query.searchAll) {
-      res.writeHead(200);
-      res.end(JSON.stringify(db));
+      getAllUsers(res);
     } else if (query.query) {
-      const user = db.find((user) => user.id === query.query);
-      if (!user) write404(res);
-      else {
-        res.writeHead(200);
-        res.end(JSON.stringify(user));
-      }
-    }
+      getUser(query.query, res);
+    } else write500AnyError(res);
   }
 };

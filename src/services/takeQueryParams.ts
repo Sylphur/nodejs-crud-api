@@ -3,7 +3,7 @@ interface queryParamInterface {
   query?: string;
 }
 
-export function getQuery(
+export function takeQueryParams(
   query: string | undefined,
 ): queryParamInterface | undefined {
   if (!query) return undefined;

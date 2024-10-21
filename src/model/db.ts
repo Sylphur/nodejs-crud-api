@@ -1,3 +1,5 @@
+import { v1 } from 'uuid';
+
 interface DbModel {
   id: string;
   username: string;
@@ -5,4 +7,11 @@ interface DbModel {
   hobbies: string[];
 }
 
-export const db: DbModel[] = [];
+export const db: DbModel[] = [
+  {
+    id: `${v1()}`,
+    username: 'Jeka',
+    age: 22,
+    hobbies: ['programming'],
+  },
+];
