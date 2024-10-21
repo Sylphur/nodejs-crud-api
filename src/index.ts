@@ -5,6 +5,7 @@ import http from 'http';
 // import events from 'events';
 import 'dotenv/config';
 import { getUsers } from './routes/get';
+import { postUsers } from './routes/post';
 // import { db } from './model/db';
 
 const PORT = process.env.PORT || 3500;
@@ -19,6 +20,15 @@ const server = http.createServer((req, res) => {
     case 'GET': {
       getUsers(req.url, res);
       break;
+    }
+    case 'POST': {
+      let body = '';
+      req.on('data', (chunk) => {
+        body += chunk.toString();
+      });
+      req.on('end', () => {
+        postUsers(req.url, body, res);
+      });
     }
   }
 });

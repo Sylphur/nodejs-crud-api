@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 
-interface DbModel {
+export interface DbModel {
   id: string;
   username: string;
   age: number;
