@@ -6,7 +6,7 @@ export type workersType = {
 };
 
 export const getWorkers = (hostname: string, startPort: number) => {
-  const available = os.cpus().length;
+  const available = os.availableParallelism();
   const res: workersType[] = [];
   for (let i = 0; i < available; i++) {
     res.push({ host: hostname, port: startPort + i + 1 });

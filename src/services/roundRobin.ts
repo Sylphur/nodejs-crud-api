@@ -1,5 +1,5 @@
 import http from 'http';
-import { workersType } from './calculateWorkers';
+import { workersType } from '../config/workersConfig';
 
 let curr = 0;
 export const roundRobin = (

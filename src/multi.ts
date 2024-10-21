@@ -1,6 +1,6 @@
 import http from 'http';
 import 'dotenv/config';
-import { getWorkers } from './services/calculateWorkers';
+import { getWorkers } from './config/workersConfig';
 import { router } from './routes/router';
 
 const PORT = process.env.PORT || 3500;
