@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { getUsers } from './routes/get';
 import { postUsers } from './routes/post';
 import { putUsers } from './routes/put';
+import { deleteUsers } from './routes/delete';
 
 const PORT = process.env.PORT || 3500;
 
@@ -28,6 +29,10 @@ const server = http.createServer((req, res) => {
       req.on('end', () => {
         putUsers(req.url, body, res);
       });
+      break;
+    }
+    case 'DELETE': {
+      deleteUsers(req.url, res);
       break;
     }
   }
